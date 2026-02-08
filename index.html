@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Furfur 🌈</title>
 
 <style>
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(270deg, #ff6f91, #ffc75f, #f9f871, #d65db1);
   background-size: 800% 800%;
   animation: bgMove 12s ease infinite;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 @keyframes bgMove {
@@ -23,11 +29,13 @@ body {
 
 .container {
   background: rgba(255,255,255,0.95);
-  padding: 35px;
+  padding: 30px;
   border-radius: 25px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.25);
   animation: popIn 1.2s ease;
+  max-width: 420px;
+  width: 100%;
 }
 
 @keyframes popIn {
@@ -37,21 +45,25 @@ body {
 
 h1 {
   color: #ff3366;
-  font-size: 32px;
+  font-size: 28px;
 }
 
 img {
-  width: 210px;
-  height: 210px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
   border: 6px solid #ff6f91;
   margin-bottom: 15px;
 }
 
+.buttons {
+  margin-top: 20px;
+}
+
 button {
-  font-size: 20px;
-  padding: 12px 35px;
+  font-size: 18px;
+  padding: 12px 30px;
   border-radius: 30px;
   border: none;
   cursor: pointer;
@@ -60,7 +72,6 @@ button {
 #yes {
   background: #ff3366;
   color: white;
-  margin-right: 20px;
 }
 
 #no {
@@ -81,7 +92,7 @@ button {
   100% { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* cartoon bounce */
+/* bounce */
 .bounce {
   animation: bounce 1s infinite alternate;
 }
@@ -89,6 +100,23 @@ button {
 @keyframes bounce {
   from { transform: translateY(0); }
   to { transform: translateY(-15px); }
+}
+
+/* 📱 Mobile adjustments */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  img {
+    width: 140px;
+    height: 140px;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 12px;
+  }
 }
 </style>
 </head>
@@ -98,44 +126,50 @@ button {
 <div class="container">
   <img src="furfur.jpg" alt="Furfur">
   <h1>Will you be my Valentine, Furfur? 🌸</h1>
-  <button id="yes">YES 😄</button>
-  <button id="no">NO 🙈</button>
+
+  <div class="buttons">
+    <button id="yes">YES 😄</button>
+    <button id="no">NO 🙈</button>
+  </div>
 </div>
 
 <script>
 const noBtn = document.getElementById("no");
 
-noBtn.addEventListener("mouseover", () => {
+function moveNoButton() {
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
   const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-});
+}
+
+// works for desktop + mobile
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
 
 document.getElementById("yes").onclick = () => {
   document.body.innerHTML = `
     <div style="
       height:100vh;
+      width:100%;
       display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:center;
       background:linear-gradient(135deg,#ff6f91,#ffc75f);
       font-family:Segoe UI;
-      text-align:center;">
+      text-align:center;
+      padding:20px;">
       
-      <div class="bounce" style="font-size:80px;">🧸</div>
-      <div class="bounce" style="font-size:60px;">🎉💖🎉</div>
+      <div class="bounce" style="font-size:70px;">🧸</div>
 
-      <h1 style="color:white;font-size:42px;margin:10px;">
+      <h1 style="color:white;font-size:36px;margin:10px;">
         Yayyy!! 😄
       </h1>
 
       <h2 style="color:white;font-weight:normal;">
         Furfur is Mine 🌈
       </h2>
-
-      <div style="font-size:40px;margin-top:15px;">✨😊✨</div>
     </div>
   `;
 };
