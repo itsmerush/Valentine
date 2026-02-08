@@ -10,9 +10,9 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(270deg, #ff6f91, #ffc75f, #845ec2);
-  background-size: 600% 600%;
-  animation: bgMove 10s ease infinite;
+  background: linear-gradient(270deg, #ff6f91, #ffc75f, #f9f871, #d65db1);
+  background-size: 800% 800%;
+  animation: bgMove 12s ease infinite;
 }
 
 @keyframes bgMove {
@@ -37,12 +37,12 @@ body {
 
 h1 {
   color: #ff3366;
-  font-size: 30px;
+  font-size: 32px;
 }
 
 img {
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   border-radius: 50%;
   object-fit: cover;
   border: 6px solid #ff6f91;
@@ -50,8 +50,8 @@ img {
 }
 
 button {
-  font-size: 18px;
-  padding: 12px 32px;
+  font-size: 20px;
+  padding: 12px 35px;
   border-radius: 30px;
   border: none;
   cursor: pointer;
@@ -67,6 +67,28 @@ button {
   background: #999;
   color: white;
   position: absolute;
+}
+
+/* hearts floating */
+.heart {
+  position: absolute;
+  font-size: 22px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* cartoon bounce */
+.bounce {
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-15px); }
 }
 </style>
 </head>
@@ -92,63 +114,42 @@ noBtn.addEventListener("mouseover", () => {
 
 document.getElementById("yes").onclick = () => {
   document.body.innerHTML = `
-  <div style="
-    height:100vh;
-    background:linear-gradient(135deg,#ff6f91,#845ec2);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    text-align:center;
-    overflow:hidden;
-  ">
+    <div style="
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#ff6f91,#ffc75f);
+      font-family:Segoe UI;
+      text-align:center;">
+      
+      <div class="bounce" style="font-size:80px;">🧸</div>
+      <div class="bounce" style="font-size:60px;">🎉💖🎉</div>
 
-  <h1 style="margin-bottom:5px;">Hehe 😄</h1>
-  <h2 style="font-weight:normal;">
-    Chalo phir… thoda fun ho hi jaaye 🚗💨
-  </h2>
+      <h1 style="color:white;font-size:42px;margin:10px;">
+        Yayyy!! 😄
+      </h1>
 
-  <!-- CARTOON SVG -->
-  <svg width="420" height="200" viewBox="0 0 420 200"
-       style="margin-top:30px; animation: drive 4s linear infinite;">
-    
-    <!-- road -->
-    <rect y="150" width="420" height="10" fill="#333" />
+      <h2 style="color:white;font-weight:normal;">
+        Furfur is Mine 🌈
+      </h2>
 
-    <!-- car body -->
-    <rect x="60" y="90" rx="25" ry="25" width="300" height="60" fill="#ff3366"/>
-    
-    <!-- wheels -->
-    <circle cx="110" cy="155" r="15" fill="#222"/>
-    <circle cx="310" cy="155" r="15" fill="#222"/>
-
-    <!-- couple heads -->
-    <circle cx="170" cy="75" r="14" fill="#ffd1dc"/>
-    <circle cx="205" cy="75" r="14" fill="#ffe0bd"/>
-
-    <!-- holding hands -->
-    <line x1="184" y1="90" x2="195" y2="90" stroke="#fff" stroke-width="3"/>
-  </svg>
-
-  <p style="margin-top:20px; font-size:18px;">
-    No overthinking. Bas smile 😊  
-  </p>
-
-  <p style="opacity:0.9;">
-    Slow nahi… fast nahi… bas sahi pace 😌
-  </p>
-
-  </div>
-
-  <style>
-    @keyframes drive {
-      0% { transform: translateX(-120px); }
-      100% { transform: translateX(120px); }
-    }
-  </style>
+      <div style="font-size:40px;margin-top:15px;">✨😊✨</div>
+    </div>
   `;
 };
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
 </script>
 
 </body>
